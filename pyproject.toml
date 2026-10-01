@@ -1,0 +1,33 @@
+[project]
+name = "bd-stubs"
+version = "0.1.0"
+description = "A type stub repository for Ballsdex."
+readme = "README.md"
+authors = [
+    { name = "Cayla", email = "official.dotzz@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "django-stubs>=6.1.1",
+]
+classifiers = [
+    "Typing :: Stubs Only",
+]
+
+[project.optional-dependencies]
+all = [
+    "discord-py>=2.7.1",
+    "prometheus-client>=0.26.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/ballsdex-stubs",
+    "src/bd_models-stubs",
+    "src/settings-stubs",
+    "src/users-stubs",
+]
