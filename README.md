@@ -1,6 +1,6 @@
 # bd-stubs
 
-Type stubs for [Ballsdex](https://github.com/Ballsdex-Team/BallsDex).
+Type stubs for [Ballsdex](https://github.com/Ballsdex-Team/BallsDex-DiscordBot).
 
 `bd-stubs` provides type information for Ballsdex, making it easier to develop packages with type checkers such as Pyright.
 
