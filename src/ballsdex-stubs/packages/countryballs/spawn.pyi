@@ -3,14 +3,13 @@ from abc import abstractmethod
 from collections import deque
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import TYPE_CHECKING, NamedTuple, Literal
+from typing import TYPE_CHECKING, Literal, NamedTuple
 
 import discord
 
 if TYPE_CHECKING:
-    from discord.ext.commands import Context
-
     from ballsdex.core.bot import BallsDexBot
+    from discord.ext.commands import Context
 
 class CachedMessage(NamedTuple):
     content: str
@@ -28,9 +27,7 @@ class BaseSpawnManager:
     bot: "BallsDexBot"
 
     @abstractmethod
-    async def handle_message(
-        self, message: discord.Message
-    ) -> bool | tuple[Literal[True], str]:
+    async def handle_message(self, message: discord.Message) -> bool | tuple[Literal[True], str]:
         """
         Handle a message event and determine if a countryball should be spawned next.
 
@@ -104,6 +101,4 @@ class SpawnManager(BaseSpawnManager):
     cooldowns: dict[int, SpawnCooldown]
 
     async def handle_message(self, message: discord.Message) -> bool: ...
-    async def admin_explain(
-        self, ctx: "Context[BallsDexBot]", guild: discord.Guild
-    ): ...
+    async def admin_explain(self, ctx: "Context[BallsDexBot]", guild: discord.Guild): ...

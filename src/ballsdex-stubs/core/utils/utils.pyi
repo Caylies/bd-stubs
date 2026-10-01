@@ -1,15 +1,12 @@
 from typing import TYPE_CHECKING
 
 import discord
-
 from bd_models.models import Player
 
 if TYPE_CHECKING:
     from ballsdex.core.bot import BallsDexBot
 
-async def is_staff(
-    interaction: discord.Interaction["BallsDexBot"], *perms: str
-) -> bool:
+async def is_staff(interaction: discord.Interaction["BallsDexBot"], *perms: str) -> bool:
     """
     Checks if an interacting user checks one of the following conditions:
 

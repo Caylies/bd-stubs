@@ -1,10 +1,9 @@
 from typing import TYPE_CHECKING, Self
 
 import discord
-from discord.ui import ActionRow, Button, TextInput
-
 from ballsdex.core.discord import LayoutView, Modal
 from bd_models.models import Ball, BallInstance, Player, Special
+from discord.ui import ActionRow, Button, TextInput
 
 if TYPE_CHECKING:
     from ballsdex.core.bot import BallsDexBot
@@ -15,12 +14,8 @@ class CountryballNamePrompt(Modal):
     view: "BallSpawnView"
 
     def __init__(self, view: "BallSpawnView") -> None: ...
-    async def on_error(
-        self, interaction: discord.Interaction["BallsDexBot"], error: Exception
-    ) -> None: ...
-    async def on_submit(
-        self, interaction: discord.Interaction["BallsDexBot"]
-    ) -> None: ...
+    async def on_error(self, interaction: discord.Interaction["BallsDexBot"], error: Exception) -> None: ...
+    async def on_submit(self, interaction: discord.Interaction["BallsDexBot"]) -> None: ...
 
 class CatchRow(ActionRow["BallSpawnView"]):
     """
@@ -81,14 +76,10 @@ class BallSpawnView(LayoutView):
     def catch_button(self) -> Button["BallSpawnView"]: ...
     @property
     def name(self) -> str: ...
-    async def interaction_check(
-        self, interaction: discord.Interaction["BallsDexBot"], /
-    ) -> bool: ...
+    async def interaction_check(self, interaction: discord.Interaction["BallsDexBot"], /) -> bool: ...
     async def on_timeout(self) -> None: ...
     @classmethod
-    async def from_existing(
-        cls, bot: "BallsDexBot", ball_instance: BallInstance
-    ) -> Self:
+    async def from_existing(cls, bot: "BallsDexBot", ball_instance: BallInstance) -> Self:
         """
         Get an instance from an existing `BallInstance`. Instead of creating a new ball instance,
         this will transfer ownership of the existing instance when caught.
@@ -125,9 +116,7 @@ class BallSpawnView(LayoutView):
         """
         ...
 
-    async def build(
-        self, spawn_message: str, file_name: str, guild_id: int | None = None
-    ) -> None:
+    async def build(self, spawn_message: str, file_name: str, guild_id: int | None = None) -> None:
         """
         Populate the components of this view. This must be called once, right before sending the
         spawn message, since the layout depends on the message and the attached image.
@@ -179,11 +168,7 @@ class BallSpawnView(LayoutView):
         ...
 
     async def catch_ball(
-        self,
-        user: discord.User | discord.Member,
-        *,
-        player: Player | None,
-        guild: discord.Guild | None,
+        self, user: discord.User | discord.Member, *, player: Player | None, guild: discord.Guild | None
     ) -> tuple[BallInstance, bool]:
         """
         Mark this countryball as caught and assign a new `BallInstance` (or transfer ownership if
@@ -215,9 +200,7 @@ class BallSpawnView(LayoutView):
         """
         ...
 
-    def get_catch_message(
-        self, ball: BallInstance, new_ball: bool, mention: str
-    ) -> str:
+    def get_catch_message(self, ball: BallInstance, new_ball: bool, mention: str) -> str:
         """
         Generate a user-facing message after a ball has been caught.
 

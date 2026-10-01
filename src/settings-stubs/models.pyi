@@ -91,12 +91,7 @@ class Settings(models.Model):
     def slow_messages(self) -> dict[str, float]: ...
     def get_random_message(self, category: "PromptMessage.PromptType") -> str: ...
     def get_formatted_message(
-        self,
-        category: "PromptMessage.PromptType",
-        model: "Ball",
-        mention: str,
-        bot: "BallsDexBot",
-        **kwargs: str,
+        self, category: "PromptMessage.PromptType", model: "Ball", mention: str, bot: "BallsDexBot", **kwargs: str
     ) -> str: ...
     @property
     def tip_messages(self) -> dict[str, float]: ...

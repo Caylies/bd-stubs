@@ -21,8 +21,5 @@ class CountryBallsSpawner(commands.Cog):
     async def load_cache(self) -> None: ...
     async def on_message(self, message: discord.Message): ...
     async def on_ballsdex_settings_change(
-        self,
-        guild: discord.Guild,
-        channel: discord.TextChannel | None = None,
-        enabled: bool | None = None,
+        self, guild: discord.Guild, channel: discord.TextChannel | None = None, enabled: bool | None = None
     ): ...

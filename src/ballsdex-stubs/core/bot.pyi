@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import Self, Sequence
 
 import discord
+from ballsdex.core.metrics import PrometheusServer
 from cachetools import TTLCache
 from discord import app_commands
 from discord.app_commands.translator import TranslationContextTypes, locale_str
@@ -10,32 +11,21 @@ from discord.ext import commands
 from discord.ext.commands.bot import PrefixType
 from discord.utils import MISSING
 
-from ballsdex.core.metrics import PrometheusServer
-
 DEFAULT_PACKAGES: tuple[tuple[str, str], ...]
 
 def owner_check(ctx: commands.Context["BallsDexBot"]) -> bool: ...
 
 class Translator(app_commands.Translator):
-    async def translate(
-        self, string: locale_str, locale: Locale, context: TranslationContextTypes
-    ) -> str | None: ...
+    async def translate(self, string: locale_str, locale: Locale, context: TranslationContextTypes) -> str | None: ...
 
 class CommandTree[Bot: BallsDexBot](app_commands.CommandTree[Bot]):
     disable_time_check: bool
 
-    async def interaction_check(
-        self, interaction: discord.Interaction[Bot], /
-    ) -> bool: ...
+    async def interaction_check(self, interaction: discord.Interaction[Bot], /) -> bool: ...
     async def load_command_mentions(
-        self,
-        app_commands: list[app_commands.AppCommand] | None = None,
-        *,
-        cog: commands.Cog | None = None,
+        self, app_commands: list[app_commands.AppCommand] | None = None, *, cog: commands.Cog | None = None
     ) -> None: ...
-    async def sync(
-        self, *, guild: discord.abc.Snowflake | None = None
-    ) -> list[app_commands.AppCommand]: ...
+    async def sync(self, *, guild: discord.abc.Snowflake | None = None) -> list[app_commands.AppCommand]: ...
 
 class BallsDexBot(commands.AutoShardedBot):
     """
@@ -88,17 +78,11 @@ class BallsDexBot(commands.AutoShardedBot):
         guilds: Sequence[discord.abc.Snowflake] = MISSING,
     ) -> None: ...
     async def on_ready(self) -> None: ...
-    async def blacklist_check(
-        self, source: discord.Interaction[Self] | commands.Context[Self]
-    ) -> bool: ...
+    async def blacklist_check(self, source: discord.Interaction[Self] | commands.Context[Self]) -> bool: ...
     async def on_command_error(
-        self,
-        context: commands.Context,
-        exception: commands.errors.CommandError | app_commands.AppCommandError,
+        self, context: commands.Context, exception: commands.errors.CommandError | app_commands.AppCommandError
     ) -> None: ...
     async def on_application_command_error(
-        self,
-        interaction: discord.Interaction[Self],
-        error: app_commands.AppCommandError,
+        self, interaction: discord.Interaction[Self], error: app_commands.AppCommandError
     ) -> None: ...
     async def on_error(self, event_method: str, /, *args, **kwargs) -> None: ...

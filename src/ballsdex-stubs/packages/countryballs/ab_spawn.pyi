@@ -4,9 +4,8 @@ from ballsdex.packages.countryballs.spawn import BaseSpawnManager
 
 if TYPE_CHECKING:
     import discord
-    from discord.ext.commands import Context
-
     from ballsdex.core.bot import BallsDexBot
+    from discord.ext.commands import Context
 
 class ABSpawner(BaseSpawnManager):
     """

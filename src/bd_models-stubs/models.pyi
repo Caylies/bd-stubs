@@ -3,11 +3,10 @@ from io import BytesIO
 from typing import TYPE_CHECKING, Any, Self
 
 import discord
+from ballsdex.core.discord import View
 from django.db import models
 from django.db.models.fields.files import ImageFieldFile
 from django.utils.safestring import SafeText
-
-from ballsdex.core.discord import View
 
 if TYPE_CHECKING:
     from ballsdex.core.bot import BallsDexBot

@@ -19,9 +19,8 @@ from discord import app_commands
 from discord.ext import commands
 
 if TYPE_CHECKING:
-    from discord.ext.commands._types import Check as CommandsCheck
-
     from ballsdex.core.bot import BallsDexBot
+    from discord.ext.commands._types import Check as CommandsCheck
     from users.models import User
 
 type Context = commands.Context["BallsDexBot"]
@@ -29,10 +28,7 @@ type Context = commands.Context["BallsDexBot"]
 registered_perms: set[str]
 
 async def check_perms(): ...
-
-async def get_user_for_check(
-    bot: "BallsDexBot", user: discord.abc.User
-) -> "bool | User":
+async def get_user_for_check(bot: "BallsDexBot", user: discord.abc.User) -> "bool | User":
     """
     Get a Django user ready and performs common permission checking.
 
@@ -89,8 +85,6 @@ def app_check(func: "CommandsCheck[Context]"):
     """
 
     async def check(interaction: discord.Interaction["BallsDexBot"]):
-        return await func.predicate(
-            await commands.Context.from_interaction(interaction)
-        )
+        return await func.predicate(await commands.Context.from_interaction(interaction))
 
     return app_commands.check(check)
